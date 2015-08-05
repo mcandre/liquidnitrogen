@@ -1,4 +1,4 @@
-from frozenexception import FrozenException
+from frozen.FrozenException import FrozenException
 
 class Frozen:
     IMMUTABLE_TYPES = frozenset({
