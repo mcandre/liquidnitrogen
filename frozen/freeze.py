@@ -72,8 +72,8 @@ def frozenmethod(obj, method_name):
             return result
         else:
             raise FrozenException(
-                'Call would mutate frozenmethod {0} on {1}'
-                .format(method_name, obj)
+                'frozenmethod call {0} with arguments {1} {2} would mutate {3}'
+                .format(method_name, args, kwargs, obj)
             )
 
     return protected_method
