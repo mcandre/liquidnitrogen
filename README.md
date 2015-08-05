@@ -2,6 +2,8 @@
 
 # EXAMPLES
 
+## freeze(list)
+
 ```
 $ python
 >>> from frozen import freeze
@@ -12,7 +14,11 @@ Traceback (most recent call last):
 AttributeError: 'tuple' object has no attribute 'append'
 >>> collection
 (1, 2, 3)
+```
 
+## freeze(dict)
+
+```
 >>> collection = freeze({'a': 1, 'b': 2, 'c': 3})
 >>> collection.update({'d': 4})
 Traceback (most recent call last):
@@ -20,7 +26,11 @@ Traceback (most recent call last):
 AttributeError: 'frozendict' object has no attribute 'update'
 >>> collection
 <frozendict {'b': 2, 'c': 3, 'a': 1}>
+```
 
+## freeze(obj)
+
+```
 >>> class Person:
     def __init__(self, name):
         self.name = name
