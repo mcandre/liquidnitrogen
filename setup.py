@@ -13,7 +13,10 @@ config = {
     'download_url': 'git@github.com:mcandre/frozen.git',
     'author_email': 'andrew.pennebaker@gmail.com',
     'version': '0.0',
-    'install_requires': [str(r.req) for r in parse_requirements('requirements.txt', session=PipSession())],
+    'install_requires': [
+        str(r.req)
+        for r in parse_requirements('requirements.txt', session=PipSession())
+    ],
     'packages': ['frozen'],
     'scripts': [],
     'name': 'frozen'

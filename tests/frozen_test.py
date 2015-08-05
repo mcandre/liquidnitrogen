@@ -2,13 +2,14 @@ from unittest import TestCase
 
 from frozen import freeze, FrozenException
 
+
 class FrozenTest(TestCase):
     def test_frozen_list_is_immutable(self):
         collection = freeze([1, 2, 3])
 
         try:
             collection.append(4)
-        except AttributeError as e:
+        except AttributeError:
             pass
 
         self.assertEqual(collection, (1, 2, 3))
@@ -18,7 +19,7 @@ class FrozenTest(TestCase):
 
         try:
             collection.update({'d': 4})
-        except AttributeError as e:
+        except AttributeError:
             pass
 
         self.assertEqual(collection, {'a': 1, 'b': 2, 'c': 3})
@@ -37,8 +38,10 @@ class FrozenTest(TestCase):
         p = freeze(Person('Alice'))
 
         try:
-            p.set_name('Bob')
-        except AttributeError as e:
+            p.name = 'Bob'
+        except FrozenException:
             pass
+
+        p.set_name('Bob')
 
         self.assertEqual(p, Person('Alice'))
