@@ -17,6 +17,12 @@ def uninstall():
 
 
 @task
+def publish():
+    run('python setup.py register')
+    run('python setup.py sdist upload')
+
+
+@task
 def pep8():
     run('pep8 .')
 
