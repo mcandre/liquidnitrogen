@@ -51,7 +51,7 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
   File "/Users/andrew.pennebaker/Desktop/src/frozen/frozen/freeze.py", line 76, in protected_method
     .format(method_name, obj)
-frozen.FrozenException.FrozenException: Method set_name would mutate frozen object Person(Alice)
+frozen.FrozenException.FrozenException: Call would mutate frozenmethod set_name on Person(Alice)
 >>> p
 Person(Alice)
 ```

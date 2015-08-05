@@ -72,7 +72,7 @@ def frozenmethod(obj, method_name):
             return result
         else:
             raise FrozenException(
-                'Method {0} would mutate frozen object {1}'
+                'Call would mutate frozenmethod {0} on {1}'
                 .format(method_name, obj)
             )
 
