@@ -19,7 +19,8 @@ config = {
     ],
     'packages': ['frozen'],
     'scripts': [],
-    'name': 'frozen'
+    'name': 'frozen',
+    'license': 'FreeBSD'
 }
 
 setup(**config)

@@ -100,3 +100,7 @@ Pet(tabby, FizzBuzz)
 
 * `freeze(dict)` uses the [frozendict](https://pypi.python.org/pypi/frozendict) library
 * `freeze(object)` based on Andreas Nilsson's [ActiveState recipe](http://code.activestate.com/recipes/576527-freeze-make-any-object-immutable/).
+
+# LICENSE
+
+FreeBSD
