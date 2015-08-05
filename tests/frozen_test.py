@@ -4,6 +4,19 @@ from frozen import freeze, FrozenException
 
 
 class FrozenTest(TestCase):
+    def test_can_freeze_native_immutables(self):
+        self.assertEqual(freeze(0), 0)
+        self.assertEqual(freeze(1.5), 1.5)
+        self.assertEqual(freeze(complex(1, 1)), complex(1, 1))
+        self.assertEqual(freeze('a'), 'a')
+        self.assertEqual(freeze('a'.encode('utf-8')), 'a'.encode('utf-8'))
+        self.assertEqual(freeze((1, 2, 3)), (1, 2, 3))
+        self.assertEqual(freeze(frozenset({1, 2, 3})), frozenset({1, 2, 3}))
+
+        add = lambda x, y: x + y
+
+        self.assertEqual(freeze(add), add)
+
     def test_frozen_list_is_immutable(self):
         collection = freeze([1, 2, 3])
 
