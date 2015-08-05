@@ -1,5 +1,9 @@
 # frozen - freeze arbitrary Python things as immutables
 
+# HOMEPAGE
+
+https://github.com/mcandre/frozen
+
 # EXAMPLES
 
 ## freeze(list)
