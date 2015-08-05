@@ -31,9 +31,6 @@ class FrozenTest(TestCase):
             def __eq__(self, other):
                 return self.name == other.name
 
-            def __cmp__(self, other):
-                return self.name.__cmp__(other.name)
-
             def set_name(self, name):
                 self.name = name
 
