@@ -7,7 +7,7 @@ from pip.req import parse_requirements
 from pip.download import PipSession
 
 config = {
-    'description': 'a Py man\'s equivalent to Ruby .freeze',
+    'description': 'freeze arbitrary Python things as immutables',
     'author': 'Andrew Pennebaker',
     'url': 'https://github.com/mcandre/frozen',
     'download_url': 'git@github.com:mcandre/frozen.git',

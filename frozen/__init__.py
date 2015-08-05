@@ -1,4 +1,9 @@
-__all__ = ['Frozen', 'FrozenException']
+__all__ = [
+    'immutable',
+    'freeze',
+    'frozenobject',
+    'FrozenException'
+]
 
-from frozen.Frozen import *
+from frozen.freeze import *
 from frozen.FrozenException import *

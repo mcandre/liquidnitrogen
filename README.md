@@ -1,4 +1,4 @@
-# frozen - a Py man's equivalent to Ruby .freeze
+# frozen - freeze arbitrary Python things as immutables
 
 # CREDITS
 
