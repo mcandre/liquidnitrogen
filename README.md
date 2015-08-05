@@ -66,6 +66,36 @@ frozen.FrozenException.FrozenException: frozenmethod call set_name with argument
 Person(Alice)
 ```
 
+## freeze specific method
+
+```
+>>> from frozen import frozenmethod
+>>> class Pet:
+...     def __init__(self, breed, name):
+...         self.breed = breed
+...         self.name = name
+...     def __eq__(self, other):
+...         return self.breed == other.breed and self.name == other.name
+...     def __repr__(self):
+...         return 'Pet({0}, {1})'.format(self.breed, self.name)
+...     def set_breed(self, breed):
+...         self.breed = breed
+...     def set_name(self, name):
+...         self.name = name
+...
+>>> p = Pet('tabby', 'Cosmo')
+>>> p.set_breed = frozenmethod(p, 'set_breed')
+>>> p.set_breed('tiger')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Users/andrew.pennebaker/Desktop/src/frozen/frozen/freeze.py", line 76, in protected_method
+    .format(method_name, args, kwargs, obj)
+frozen.FrozenException.FrozenException: frozenmethod call set_breed with arguments ('tiger',) {} would mutate Pet(tabby, Cosmo)
+>>> p.set_name('FizzBuzz')
+>>> p
+Pet(tabby, FizzBuzz)
+```
+
 # CREDITS
 
 * `freeze(dict)` uses the [frozendict](https://pypi.python.org/pypi/frozendict) library

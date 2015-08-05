@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from frozen import freeze, FrozenException
+from frozen import freeze, frozenmethod, FrozenException
 
 
 class FrozenTest(TestCase):
@@ -70,3 +70,36 @@ class FrozenTest(TestCase):
         )
 
         self.assertEqual(p, Person('Alice'))
+
+    def test_frozen_method_is_immutable(self):
+        class Pet:
+            def __init__(self, breed, name):
+                self.breed = breed
+                self.name = name
+
+            def __eq__(self, other):
+                return self.breed == other.breed and self.name == other.name
+
+            def __repr__(self):
+                return 'Pet({0}, {1})'.format(self.breed, self.name)
+
+            def set_breed(self, breed):
+                self.breed = breed
+
+            def set_name(self, name):
+                self.name = name
+
+        p = Pet('tabby', 'Cosmo')
+        p.set_breed = frozenmethod(p, 'set_breed')
+
+        def try_to_use_breed_set_method():
+            p.set_breed('tiger')
+
+        self.assertRaises(
+            FrozenException,
+            try_to_use_breed_set_method
+        )
+
+        p.set_name('FizzBuzz')
+
+        self.assertEqual(p, Pet('tabby', 'FizzBuzz'))
