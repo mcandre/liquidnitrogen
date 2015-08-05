@@ -32,16 +32,28 @@ class FrozenTest(TestCase):
             def __eq__(self, other):
                 return self.name == other.name
 
+            def __repr__(self):
+                return 'Person({0})'.format(self.name)
+
             def set_name(self, name):
                 self.name = name
 
         p = freeze(Person('Alice'))
 
-        try:
+        def try_to_set_name_attribute():
             p.name = 'Bob'
-        except FrozenException:
-            pass
 
-        p.set_name('Bob')
+        self.assertRaises(
+            FrozenException,
+            try_to_set_name_attribute
+        )
+
+        def try_to_use_name_set_method():
+            p.set_name('Bob')
+
+        self.assertRaises(
+            FrozenException,
+            try_to_use_name_set_method
+        )
 
         self.assertEqual(p, Person('Alice'))
