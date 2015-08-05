@@ -7,6 +7,16 @@ def test():
 
 
 @task
+def install():
+    run('pip install -e .')
+
+
+@task
+def uninstall():
+    run('pip uninstall frozen')
+
+
+@task
 def pep8():
     run('pep8 .')
 
