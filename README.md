@@ -4,6 +4,10 @@
 
 https://github.com/mcandre/liquidnitrogen
 
+# PyPi
+
+https://pypi.python.org/pypi/liquidnitrogen
+
 # EXAMPLES
 
 ## freeze(list)
