@@ -125,3 +125,25 @@ class LiquidNitrogenTest(TestCase):
         p.set_name('FizzBuzz')
 
         self.assertEqual(p, Pet('tabby', 'FizzBuzz'))
+
+    def test_frozen_default_args_are_immutable(self):
+        def bad_append(value, lst=[]):
+            lst.append(value)
+            return lst
+
+        train1 = bad_append('engine')
+        train2 = bad_append('caboose', train1)
+
+        train3 = bad_append('engine')
+
+        self.assertEqual(train3, ['engine', 'caboose', 'engine'])
+
+        def good_append(value, lst=freeze([])):
+            return lst + (value,)
+
+        train3 = good_append('engine')
+        train4 = good_append('caboose', train3)
+
+        train5 = good_append('engine')
+
+        self.assertEqual(train5, ('engine',))

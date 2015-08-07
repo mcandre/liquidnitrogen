@@ -10,6 +10,31 @@ https://pypi.python.org/pypi/liquidnitrogen
 
 # EXAMPLES
 
+## frozen default arguments
+
+```
+>>> def bad_append(value, lst=[]):
+    lst.append(value)
+    return lst
+
+>>> train1 = bad_append('engine')
+>>> train2 = bad_append('caboose', train1)
+
+>>> train3 = bad_append('engine')
+>>> train3
+['engine', 'caboose', 'engine']
+
+>>> def good_append(value, lst=freeze([])):
+    return lst + (value,)
+
+>>> train3 = good_append('engine')
+>>> train4 = good_append('caboose', train3)
+
+>>> train5 = good_append('engine')
+>>> train5
+('engine',)
+```
+
 ## freeze(list)
 
 ```
@@ -54,6 +79,7 @@ Warning: `freezemethod` and `freezeobject` perform a `deepcopy` of the object's 
         return self.breed == other.breed and self.name == other.name
     def __repr__(self):
         return 'Pet({0}, {1})'.format(self.breed, self.name)
+
 >>> p = Pet('tabby', 'Cosmo')
 >>> p.set_breed = frozenmethod(p, 'set_breed')
 >>> p.set_breed('tiger')
