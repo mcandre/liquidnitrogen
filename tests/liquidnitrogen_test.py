@@ -8,6 +8,9 @@ from liquidnitrogen import freeze, frozenmethod, LiquidNitrogenException
 
 class LiquidNitrogenTest(TestCase):
     def test_can_freeze_native_immutables(self):
+        self.assertEqual(freeze(None), None)
+        self.assertEqual(freeze(True), True)
+        self.assertEqual(freeze(False), False)
         self.assertEqual(freeze(0), 0)
         self.assertEqual(freeze(1.5), 1.5)
         self.assertEqual(freeze(complex(1, 1)), complex(1, 1))

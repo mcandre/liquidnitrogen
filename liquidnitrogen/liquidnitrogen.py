@@ -31,6 +31,9 @@ def isimmutable(thing):
     '''
 
     return (
+        thing is None or
+        thing is True or
+        thing is False or
         any([
             isinstance(thing, t)
             for t in IMMUTABLE_TYPES.union(frozenset({frozenobject}))
