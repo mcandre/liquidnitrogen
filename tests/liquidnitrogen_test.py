@@ -1,5 +1,7 @@
 from unittest import TestCase
 from collections import OrderedDict
+from datetime import datetime
+from pytz import utc
 
 from liquidnitrogen import freeze, frozenmethod, LiquidNitrogenException
 
@@ -17,6 +19,12 @@ class LiquidNitrogenTest(TestCase):
         add = lambda x, y: x + y
 
         self.assertEqual(freeze(add), add)
+
+        t = datetime.now()
+        t2 = freeze(t)
+        t2.replace(tzinfo=utc)
+
+        self.assertEqual(t2, t)
 
     def test_frozen_list_is_immutable(self):
         collection = freeze([1, 2, 3])

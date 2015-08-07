@@ -1,4 +1,5 @@
 from inspect import isfunction
+from datetime import datetime
 from collections import OrderedDict
 
 from frozendict import frozendict
@@ -15,6 +16,7 @@ IMMUTABLE_TYPES = frozenset({
     bytes,
     tuple,
     frozenset,
+    datetime,
     frozendict,
     FrozenOrderedDict
 })
