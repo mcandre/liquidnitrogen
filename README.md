@@ -32,6 +32,37 @@ AttributeError: 'frozendict' object has no attribute 'update'
 <frozendict {'b': 2, 'c': 3, 'a': 1}>
 ```
 
+## freezemethod(obj, method_name)
+
+Warning: `freezemethod` and `freezeobject` perform a `deepcopy` of the object's attributes upon each method call in order to test whether the method call would modify the object. The attribute copy  may use a significant amount of memory. To save memory, model data with structures designed to be immutable, such as tuples, frozensets, frozendicts, etc.
+
+```
+>>> from liquidnitrogen import frozenmethod
+>>> class Pet:
+    def __init__(self, breed, name):
+        self.breed = breed
+        self.name = name
+    def set_breed(self, breed):
+        self.breed = breed
+    def set_name(self, name):
+        self.name = name
+    def __eq__(self, other):
+        return self.breed == other.breed and self.name == other.name
+    def __repr__(self):
+        return 'Pet({0}, {1})'.format(self.breed, self.name)
+>>> p = Pet('tabby', 'Cosmo')
+>>> p.set_breed = frozenmethod(p, 'set_breed')
+>>> p.set_breed('tiger')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/Users/andrew/Desktop/src/liquidnitrogen/liquidnitrogen/liquidnitrogen.py", line 76, in protected_method
+    .format(method_name, args, kwargs, obj)
+liquidnitrogen.LiquidNitrogenException: frozenmethod call set_breed with arguments ('tiger',) {} would mutate Pet(tabby, Cosmo)
+>>> p.set_name('FizzBuzz')
+>>> p
+Pet(tabby, FizzBuzz)
+```
+
 ## freeze(obj)
 
 ```
@@ -59,35 +90,6 @@ Traceback (most recent call last):
 liquidnitrogen.LiquidNitrogenException: frozenmethod call set_name with arguments ('Bob',) {} would mutate Person(Alice)
 >>> p
 Person(Alice)
-```
-
-## freeze specific method
-
-```
->>> from liquidnitrogen import frozenmethod
->>> class Pet:
-    def __init__(self, breed, name):
-        self.breed = breed
-        self.name = name
-    def set_breed(self, breed):
-        self.breed = breed
-    def set_name(self, name):
-        self.name = name
-    def __eq__(self, other):
-        return self.breed == other.breed and self.name == other.name
-    def __repr__(self):
-        return 'Pet({0}, {1})'.format(self.breed, self.name)
->>> p = Pet('tabby', 'Cosmo')
->>> p.set_breed = frozenmethod(p, 'set_breed')
->>> p.set_breed('tiger')
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-  File "/Users/andrew/Desktop/src/liquidnitrogen/liquidnitrogen/liquidnitrogen.py", line 76, in protected_method
-    .format(method_name, args, kwargs, obj)
-liquidnitrogen.LiquidNitrogenException: frozenmethod call set_breed with arguments ('tiger',) {} would mutate Pet(tabby, Cosmo)
->>> p.set_name('FizzBuzz')
->>> p
-Pet(tabby, FizzBuzz)
 ```
 
 # CREDITS
