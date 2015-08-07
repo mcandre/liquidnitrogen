@@ -12,7 +12,7 @@ setup(
     url='https://github.com/mcandre/liquidnitrogen',
     download_url='git@github.com:mcandre/liquidnitrogen.git',
     author_email='andrew.pennebaker@gmail.com',
-    version='0.0',
+    version='0.0.0',
     install_requires=[
         str(r.req)
         for r in parse_requirements('requirements.txt', session=PipSession())
