@@ -45,3 +45,10 @@ def flake8():
 @task(pre=[pep8, pylint, pyflakes, flake8])
 def lint():
     pass
+
+
+@task
+def clean():
+    run('rm -rf dist/; true')
+    run('find . -type d -name __pycache__ -exec rm -rf {} \\;; true')
+    run('rm -rf *.egg-info; true')
