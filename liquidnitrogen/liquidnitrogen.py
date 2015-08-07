@@ -47,7 +47,12 @@ class frozenobject(object):
         A wrapper for arbitrary Python objects,
         that protects against attribute mutation
 
-        Warning: `freezemethod` and `freezeobject` perform a `deepcopy` of the object's attributes upon each method call in order to test whether the method call would modify the object. The attribute copy  may use a significant amount of memory. To save memory, model data with structures designed to be immutable, such as tuples, frozensets, frozendicts, etc.
+        Warning: `freezemethod` and `freezeobject` perform a `deepcopy`
+        of the object's attributes upon each method call in order to
+        test whether the method call would modify the object. The attribute copy
+        may use a significant amount of memory.
+        To save memory, model data with structures designed to be immutable,
+        such as tuples, frozensets, frozendicts, etc.
     '''
 
     def __init__(self, value):
@@ -127,7 +132,12 @@ def frozenmethod(obj, method_name):
         that detects when a call would modify the object,
         and instead raises LiquidNitrogenException
 
-        Warning: `freezemethod` and `freezeobject` perform a `deepcopy` of the object's attributes upon each method call in order to test whether the method call would modify the object. The attribute copy  may use a significant amount of memory. To save memory, model data with structures designed to be immutable, such as tuples, frozensets, frozendicts, etc.
+        Warning: `freezemethod` and `freezeobject` perform a `deepcopy`
+        of the object's attributes upon each method call in order to
+        test whether the method call would modify the object. The attribute copy
+        may use a significant amount of memory.
+        To save memory, model data with structures designed to be immutable,
+        such as tuples, frozensets, frozendicts, etc.
 
         :param object obj: an object
         :param str method_name: a method to wrap on the object
@@ -151,15 +161,22 @@ def frozenmethod(obj, method_name):
 
     return protected_method
 
+
 def freeze(thing):
     '''
         Given a Python value, return an immutable version of the value.
 
         Natively immutable values such as tuples, frozensets, and frozendicts are simply returned as-is.
 
-        Methods and objects are wrapped to raise LiquidNitrogenExceptions on attempts to set attributes or call methods that would mutate the objects.
+        Methods and objects are wrapped to raise LiquidNitrogenExceptions
+        on attempts to set attributes or call methods that would mutate the objects.
 
-        Warning: `freezemethod` and `freezeobject` perform a `deepcopy` of the object's attributes upon each method call in order to test whether the method call would modify the object. The attribute copy  may use a significant amount of memory. To save memory, model data with structures designed to be immutable, such as tuples, frozensets, frozendicts, etc.
+        Warning: `freezemethod` and `freezeobject` perform a `deepcopy`
+        of the object's attributes upon each method call in order to
+        test whether the method call would modify the object. The attribute copy
+        may use a significant amount of memory.
+        To save memory, model data with structures designed to be immutable,
+        such as tuples, frozensets, frozendicts, etc.
 
         :param value thing: a Python value (object or primitive)
         :returns a frozen version of the value

@@ -19,7 +19,7 @@ class LiquidNitrogenTest(TestCase):
         self.assertEqual(freeze((1, 2, 3)), (1, 2, 3))
         self.assertEqual(freeze(frozenset({1, 2, 3})), frozenset({1, 2, 3}))
 
-        add = lambda x, y: x + y
+        add = lambda x, y: x + y  # noqa
 
         self.assertEqual(freeze(add), add)
 
@@ -132,7 +132,7 @@ class LiquidNitrogenTest(TestCase):
             return lst
 
         train1 = bad_append('engine')
-        train2 = bad_append('caboose', train1)
+        train2 = bad_append('caboose', train1)  # noqa
 
         train3 = bad_append('engine')
 
@@ -142,7 +142,7 @@ class LiquidNitrogenTest(TestCase):
             return lst + (value,)
 
         train3 = good_append('engine')
-        train4 = good_append('caboose', train3)
+        train4 = good_append('caboose', train3)  # noqa
 
         train5 = good_append('engine')
 
