@@ -1,0 +1,2 @@
+class LiquidNitrogenException(Exception):
+    pass

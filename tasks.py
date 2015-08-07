@@ -13,7 +13,7 @@ def install():
 
 @task
 def uninstall():
-    run('pip uninstall frozen')
+    run('pip uninstall liquidnitrogen')
 
 
 @task

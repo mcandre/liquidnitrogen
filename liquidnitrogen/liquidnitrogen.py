@@ -3,7 +3,7 @@ from inspect import isfunction
 from frozendict import frozendict
 from copy import deepcopy
 
-from frozen.FrozenException import FrozenException
+from liquidnitrogen.exceptions import LiquidNitrogenException
 
 IMMUTABLE_TYPES = frozenset({
     int,
@@ -17,7 +17,7 @@ IMMUTABLE_TYPES = frozenset({
 })
 
 
-def immutable(thing):
+def isimmutable(thing):
     return (
         any([
             isinstance(thing, t)
@@ -48,7 +48,7 @@ class frozenobject(object):
         if name == '_value':
             super(frozenobject, self).__setattr__('_value', value)
         else:
-            raise FrozenException(
+            raise LiquidNitrogenException(
                 'Cannot alter attribute {0} of frozenobject {1}'
                 .format(name, self)
             )
@@ -71,7 +71,7 @@ def frozenmethod(obj, method_name):
         if obj_copy == obj:
             return result
         else:
-            raise FrozenException(
+            raise LiquidNitrogenException(
                 'frozenmethod call {0} with arguments {1} {2} would mutate {3}'
                 .format(method_name, args, kwargs, obj)
             )
@@ -79,7 +79,7 @@ def frozenmethod(obj, method_name):
     return protected_method
 
 def freeze(thing):
-    if immutable(thing):
+    if isimmutable(thing):
         return thing
     elif isinstance(thing, list):
         return tuple(thing)

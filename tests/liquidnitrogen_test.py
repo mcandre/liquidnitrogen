@@ -1,9 +1,9 @@
 from unittest import TestCase
 
-from frozen import freeze, frozenmethod, FrozenException
+from liquidnitrogen import freeze, frozenmethod, LiquidNitrogenException
 
 
-class FrozenTest(TestCase):
+class LiquidNitrogenTest(TestCase):
     def test_can_freeze_native_immutables(self):
         self.assertEqual(freeze(0), 0)
         self.assertEqual(freeze(1.5), 1.5)
@@ -57,7 +57,7 @@ class FrozenTest(TestCase):
             p.name = 'Bob'
 
         self.assertRaises(
-            FrozenException,
+            LiquidNitrogenException,
             try_to_set_name_attribute
         )
 
@@ -65,7 +65,7 @@ class FrozenTest(TestCase):
             p.set_name('Bob')
 
         self.assertRaises(
-            FrozenException,
+            LiquidNitrogenException,
             try_to_use_name_set_method
         )
 
@@ -96,7 +96,7 @@ class FrozenTest(TestCase):
             p.set_breed('tiger')
 
         self.assertRaises(
-            FrozenException,
+            LiquidNitrogenException,
             try_to_use_breed_set_method
         )
 

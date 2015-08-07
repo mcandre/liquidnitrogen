@@ -1,8 +1,8 @@
-# frozen - freeze arbitrary Python things as immutables
+# liquidnitrogen - freeze arbitrary Python things as immutables
 
 # HOMEPAGE
 
-https://github.com/mcandre/frozen
+https://github.com/mcandre/liquidnitrogen
 
 # EXAMPLES
 
@@ -10,7 +10,7 @@ https://github.com/mcandre/frozen
 
 ```
 $ python
->>> from frozen import freeze
+>>> from liquidnitrogen import freeze
 >>> collection = freeze([1, 2, 3])
 >>> collection.append(4)
 Traceback (most recent call last):
@@ -57,15 +57,15 @@ AttributeError: 'frozendict' object has no attribute 'update'
 >>> p.name = 'Bob'
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/Users/andrew.pennebaker/Desktop/src/frozen/frozen/freeze.py", line 53, in __setattr__
+  File "/Users/andrew.pennebaker/Desktop/src/liquidnitrogen/liquidnitrogen/freeze.py", line 53, in __setattr__
     .format(name, self)
-frozen.FrozenException.FrozenException: Cannot alter attribute name of frozenobject Person(Alice)
+liquidnitrogen.LiquidNitrogenException: Cannot alter attribute name of frozenobject Person(Alice)
 >>> p.set_name('Bob')
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/Users/andrew.pennebaker/Desktop/src/frozen/frozen/freeze.py", line 76, in protected_method
+  File "/Users/andrew.pennebaker/Desktop/src/liquidnitrogen/liquidnitrogen/liquidnitrogen.py", line 76, in protected_method
     .format(method_name, obj)
-frozen.FrozenException.FrozenException: frozenmethod call set_name with arguments ('Bob',) {} would mutate Person(Alice)
+liquidnitrogen.LiquidNitrogenException: frozenmethod call set_name with arguments ('Bob',) {} would mutate Person(Alice)
 >>> p
 Person(Alice)
 ```
@@ -73,7 +73,7 @@ Person(Alice)
 ## freeze specific method
 
 ```
->>> from frozen import frozenmethod
+>>> from liquidnitrogen import frozenmethod
 >>> class Pet:
 ...     def __init__(self, breed, name):
 ...         self.breed = breed
@@ -92,9 +92,9 @@ Person(Alice)
 >>> p.set_breed('tiger')
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/Users/andrew.pennebaker/Desktop/src/frozen/frozen/freeze.py", line 76, in protected_method
+  File "/Users/andrew.pennebaker/Desktop/src/liquidnitrogen/liquidnitrogen/liquidnitrogen.py", line 76, in protected_method
     .format(method_name, args, kwargs, obj)
-frozen.FrozenException.FrozenException: frozenmethod call set_breed with arguments ('tiger',) {} would mutate Pet(tabby, Cosmo)
+liquidnitrogen.LiquidNitrogenException: frozenmethod call set_breed with arguments ('tiger',) {} would mutate Pet(tabby, Cosmo)
 >>> p.set_name('FizzBuzz')
 >>> p
 Pet(tabby, FizzBuzz)
