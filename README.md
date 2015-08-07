@@ -66,18 +66,17 @@ Person(Alice)
 ```
 >>> from liquidnitrogen import frozenmethod
 >>> class Pet:
-...     def __init__(self, breed, name):
-...         self.breed = breed
-...         self.name = name
-...     def __eq__(self, other):
-...         return self.breed == other.breed and self.name == other.name
-...     def __repr__(self):
-...         return 'Pet({0}, {1})'.format(self.breed, self.name)
-...     def set_breed(self, breed):
-...         self.breed = breed
-...     def set_name(self, name):
-...         self.name = name
-...
+    def __init__(self, breed, name):
+        self.breed = breed
+        self.name = name
+    def set_breed(self, breed):
+        self.breed = breed
+    def set_name(self, name):
+        self.name = name
+    def __eq__(self, other):
+        return self.breed == other.breed and self.name == other.name
+    def __repr__(self):
+        return 'Pet({0}, {1})'.format(self.breed, self.name)
 >>> p = Pet('tabby', 'Cosmo')
 >>> p.set_breed = frozenmethod(p, 'set_breed')
 >>> p.set_breed('tiger')
