@@ -38,32 +38,23 @@ AttributeError: 'frozendict' object has no attribute 'update'
 >>> class Person:
     def __init__(self, name):
         self.name = name
-    def __eq__(self, other):
-        return self.name == other.name
     def set_name(self, name):
         self.name = name
-
->>> class Person:
-...     def __init__(self, name):
-...         self.name = name
-...     def set_name(self, name):
-...         self.name = name
-...     def __eq__(self, other):
-...         return self.name == other.name
-...     def __repr__(self):
-...         return 'Person({0})'.format(self.name)
-...
+    def __eq__(self, other):
+        return self.name == other.name
+    def __repr__(self):
+        return 'Person({0})'.format(self.name)
 >>> p = freeze(Person('Alice'))
 >>> p.name = 'Bob'
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/Users/andrew.pennebaker/Desktop/src/liquidnitrogen/liquidnitrogen/freeze.py", line 53, in __setattr__
+  File "/Users/andrew/Desktop/src/liquidnitrogen/liquidnitrogen/freeze.py", line 53, in __setattr__
     .format(name, self)
 liquidnitrogen.LiquidNitrogenException: Cannot alter attribute name of frozenobject Person(Alice)
 >>> p.set_name('Bob')
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/Users/andrew.pennebaker/Desktop/src/liquidnitrogen/liquidnitrogen/liquidnitrogen.py", line 76, in protected_method
+  File "/Users/andrew/Desktop/src/liquidnitrogen/liquidnitrogen/liquidnitrogen.py", line 76, in protected_method
     .format(method_name, obj)
 liquidnitrogen.LiquidNitrogenException: frozenmethod call set_name with arguments ('Bob',) {} would mutate Person(Alice)
 >>> p
@@ -92,7 +83,7 @@ Person(Alice)
 >>> p.set_breed('tiger')
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/Users/andrew.pennebaker/Desktop/src/liquidnitrogen/liquidnitrogen/liquidnitrogen.py", line 76, in protected_method
+  File "/Users/andrew/Desktop/src/liquidnitrogen/liquidnitrogen/liquidnitrogen.py", line 76, in protected_method
     .format(method_name, args, kwargs, obj)
 liquidnitrogen.LiquidNitrogenException: frozenmethod call set_breed with arguments ('tiger',) {} would mutate Pet(tabby, Cosmo)
 >>> p.set_name('FizzBuzz')
