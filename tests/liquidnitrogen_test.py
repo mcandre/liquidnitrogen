@@ -1,4 +1,5 @@
 from unittest import TestCase
+from collections import OrderedDict
 
 from liquidnitrogen import freeze, frozenmethod, LiquidNitrogenException
 
@@ -36,6 +37,16 @@ class LiquidNitrogenTest(TestCase):
             pass
 
         self.assertEqual(collection, {'a': 1, 'b': 2, 'c': 3})
+
+    def test_frozen_ordered_dict_is_immutable(self):
+        collection = freeze(OrderedDict([('a', 1), ('b', 2), ('c', 3)]))
+
+        try:
+            collection.update(('d', 4))
+        except AttributeError:
+            pass
+
+        self.assertEqual(collection, OrderedDict([('a', 1), ('b', 2), ('c', 3)]))
 
     def test_frozen_object_is_immutable(self):
         class Person:

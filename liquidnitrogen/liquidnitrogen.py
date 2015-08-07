@@ -1,6 +1,8 @@
 from inspect import isfunction
+from collections import OrderedDict
 
 from frozendict import frozendict
+from frozenordereddict import FrozenOrderedDict
 from copy import deepcopy
 
 from liquidnitrogen.exceptions import LiquidNitrogenException
@@ -13,7 +15,8 @@ IMMUTABLE_TYPES = frozenset({
     bytes,
     tuple,
     frozenset,
-    frozendict
+    frozendict,
+    FrozenOrderedDict
 })
 
 
@@ -85,6 +88,8 @@ def freeze(thing):
         return tuple(thing)
     elif isinstance(thing, set):
         return frozenset(thing)
+    elif isinstance(thing, OrderedDict):
+        return FrozenOrderedDict(thing)
     elif isinstance(thing, dict):
         return frozendict(thing)
     else:
