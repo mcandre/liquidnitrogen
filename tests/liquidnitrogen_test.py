@@ -57,7 +57,10 @@ class LiquidNitrogenTest(TestCase):
         except AttributeError:
             pass
 
-        self.assertEqual(collection, OrderedDict([('a', 1), ('b', 2), ('c', 3)]))
+        self.assertEqual(
+            collection,
+            OrderedDict([('a', 1), ('b', 2), ('c', 3)])
+        )
 
     def test_frozen_object_is_immutable(self):
         class Person:

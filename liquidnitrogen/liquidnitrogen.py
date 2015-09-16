@@ -9,6 +9,8 @@ from copy import deepcopy
 from liquidnitrogen.exceptions import LiquidNitrogenException
 
 IMMUTABLE_TYPES = frozenset({
+    type(None),
+    bool,
     int,
     float,
     complex,
@@ -27,13 +29,10 @@ def isimmutable(thing):
         Determine whether a thing is immutable
 
         :param value thing: a Python value (object or primitive)
-        :returns true if the value is known to liquidnitrogen to be of an immutable type
+        :returns true if the value is known to be immutable
     '''
 
     return (
-        thing is None or
-        thing is True or
-        thing is False or
         any([
             isinstance(thing, t)
             for t in IMMUTABLE_TYPES.union(frozenset({frozenobject}))
@@ -49,8 +48,10 @@ class frozenobject(object):
 
         Warning: `freezemethod` and `freezeobject` perform a `deepcopy`
         of the object's attributes upon each method call in order to
-        test whether the method call would modify the object. The attribute copy
-        may use a significant amount of memory.
+        test whether the method call would modify the object.
+
+        The attribute copy may use a significant amount of memory.
+
         To save memory, model data with structures designed to be immutable,
         such as tuples, frozensets, frozendicts, etc.
     '''
@@ -134,8 +135,10 @@ def frozenmethod(obj, method_name):
 
         Warning: `freezemethod` and `freezeobject` perform a `deepcopy`
         of the object's attributes upon each method call in order to
-        test whether the method call would modify the object. The attribute copy
-        may use a significant amount of memory.
+        test whether the method call would modify the object.
+
+        The attribute copy may use a significant amount of memory.
+
         To save memory, model data with structures designed to be immutable,
         such as tuples, frozensets, frozendicts, etc.
 
@@ -166,15 +169,19 @@ def freeze(thing):
     '''
         Given a Python value, return an immutable version of the value.
 
-        Natively immutable values such as tuples, frozensets, and frozendicts are simply returned as-is.
+        Natively immutable values such as tuples, frozensets, and frozendicts
+        are simply returned as-is.
 
         Methods and objects are wrapped to raise LiquidNitrogenExceptions
-        on attempts to set attributes or call methods that would mutate the objects.
+        on attempts to set attributes or call methods
+        that would mutate the objects.
 
         Warning: `freezemethod` and `freezeobject` perform a `deepcopy`
         of the object's attributes upon each method call in order to
-        test whether the method call would modify the object. The attribute copy
-        may use a significant amount of memory.
+        test whether the method call would modify the object.
+
+        The attribute copy may use a significant amount of memory.
+
         To save memory, model data with structures designed to be immutable,
         such as tuples, frozensets, frozendicts, etc.
 
