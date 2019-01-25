@@ -1,2 +1,2 @@
-frozendict==0.4
-frozenordereddict==1.2.0
+frozendict>=0.4,<0.5
+frozenordereddict>=1.2.0,<2.0
